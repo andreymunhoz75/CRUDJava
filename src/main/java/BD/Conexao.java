@@ -21,7 +21,7 @@ public class Conexao {
     private static final String USER = "root";
     private static final String PASS = "123456";
     
-    public static Connection getConnection(){
+    public static Connection getConnection(){  
         try {
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);
