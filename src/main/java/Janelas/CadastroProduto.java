@@ -6,22 +6,24 @@ package Janelas;
 
 import BD.Conexao;
 import Model.ProdutoTableModel;
+import Obejtos.Produto;
 
 /**
  *
  * @author andrey.munhoz
  */
 public class CadastroProduto extends javax.swing.JFrame {
+
     ProdutoTableModel modelo = new ProdutoTableModel();
-        
-    
+
     /**
      * Creates new form CadastroProduto
      */
     public CadastroProduto() {
         initComponents();
         jTProdutos.setModel(modelo);
-        
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -72,10 +74,20 @@ public class CadastroProduto extends javax.swing.JFrame {
         });
 
         jBCadastrar.setText("Cadastrar");
+        jBCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarActionPerformed(evt);
+            }
+        });
 
         jBAlterar.setText("Alterar");
 
         jBExcluir.setText("Excluir");
+        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,7 +171,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -169,6 +181,27 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void jTQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTQuantidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTQuantidadeActionPerformed
+
+    private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
+        Produto p = new Produto();
+        p.setDescricao(jTDescricao.getText());
+        p.setQuantidade(Integer.parseInt(jTQuantidade.getText()));
+        p.setValor(Double.valueOf(jTValor.getText().replace(",", ".")));
+        modelo.addLinha(p);
+        LimpaCampos();
+    }//GEN-LAST:event_jBCadastrarActionPerformed
+
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+        if (jTProdutos.getSelectedRow() != -1){
+            modelo.removeLinha(jTProdutos.getSelectedRow());
+        }
+    }//GEN-LAST:event_jBExcluirActionPerformed
+
+    private void LimpaCampos() {
+        jTDescricao.setText("");
+        jTQuantidade.setText("");
+        jTValor.setText("");
+    }
 
     /**
      * @param args the command line arguments
