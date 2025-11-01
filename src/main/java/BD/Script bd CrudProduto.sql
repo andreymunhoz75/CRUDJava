@@ -18,3 +18,13 @@ create table tbl_Produto (
         
 	insert into tbl_Produto(descricao, valor, quantidade)
     values('Arroz', 2.50, 4);
+    
+    create table tbl_usuarios (
+		id int auto_increment not null primary key,
+        nome varchar(80) not null,
+        login varchar(50) not null,
+        senha varchar(255) not null,
+        tipo varchar(10) not null
+        );
+        
+        
